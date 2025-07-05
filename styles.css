@@ -20,15 +20,21 @@ body {
 }
 
 header {
-    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semitransparente */
+    background-color: rgba(255, 255, 255, 0.5); /* Más transparente */
     backdrop-filter: blur(10px); /* Efecto de desenfoque */
     -webkit-backdrop-filter: blur(10px); /* Compatibilidad con navegadores WebKit */
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra para efecto flotante */
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Añadido transform */
+}
+
+header.scrolled {
+    background-color: rgba(255, 255, 255, 0.8); /* Más opaco al hacer scroll, pero aún con transparencia */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Sombra más pronunciada al hacer scroll */
+    transform: translateY(-5px); /* Efecto de elevación sutil al hacer scroll */
 }
 
 .navbar {
@@ -65,7 +71,7 @@ header {
 
 .nav-link{
     font-size: 1.1rem;
-    font-weight: 500; /* Ajustado a 500 */
+    font-weight: 600; /* Ajustado a 600 para más grosor */
     color: var(--text-color);
     text-decoration: none;
     position: relative;
@@ -109,7 +115,7 @@ header {
 }
 
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(rgba(0, 86, 179, 0.6), rgba(0, 86, 179, 0.6)), url('images/pexels-pixabay-257736.jpg') no-repeat center center/cover; /* Capa celeste más visible y opacidad ajustada */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(rgba(0, 86, 179, 0.4), rgba(0, 86, 179, 0.4)), url('images/pexels-pixabay-257736.jpg') no-repeat center center/cover; /* Capa celeste más visible y opacidad ajustada */
     background-attachment: scroll; /* La imagen se mueve con la página */
     color: white;
     text-align: center;
@@ -138,15 +144,22 @@ header {
     font-family: var(--font-family-headings);
     font-size: 3.8rem; /* Tamaño de fuente ajustado */
     margin-bottom: 1rem;
-    animation: fadeInDown 1s ease-in-out;
+    animation: fadeInDown 1s ease-in-out, breathe 3s infinite alternate 1s; /* Añadida animación breathe */
     font-weight: 800; /* Más negrita para títulos principales */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra de texto para legibilidad */
 }
 
 .hero p, .hero-services p, .hero-about p, .hero-contact p {
     font-size: 1.4rem; /* Tamaño de fuente ajustado */
     margin-bottom: 2rem;
-    animation: fadeInUp 1s ease-in-out;
+    animation: fadeInUp 1s ease-in-out, breathe 3s infinite alternate 1s; /* Añadida animación breathe */
     font-weight: 400; /* Normal */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra de texto para legibilidad */
+}
+
+@keyframes breathe {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.005); opacity: 0.99; }
 }
 
 .cta-button {
@@ -154,17 +167,145 @@ header {
     color: var(--dark-color);
     padding: 1rem 2.5rem;
     text-decoration: none;
-    border-radius: 8px; /* Borde menos redondeado */
-    font-weight: 700; /* Negrita */
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transiciones mejoradas */
-    animation: pulse 2s infinite;
-    border: 2px solid var(--secondary-color); /* Borde sutil */
+    border-radius: 8px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--secondary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: pulse 2s infinite; /* Aplicar la animación sutil */
 }
 
 .cta-button:hover {
     background-color: #e0a800;
-    transform: scale(1.08) translateY(-3px); /* Efecto de elevación y escala */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Sombra más pronunciada */
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 20px var(--secondary-color), 0 0 40px var(--secondary-color); /* Resplandor eléctrico más notable */
+}
+
+.cta-button i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover i {
+    transform: translateX(5px);
+}
+
+.cta-button::before,
+.cta-button::after {
+    content: '';
+    position: absolute;
+    background: var(--secondary-color);
+    opacity: 0.3; /* Opacidad reducida */
+    transition: opacity 0.3s ease;
+}
+
+.cta-button::before {
+    top: 0;
+    left: -200%; /* Extender más allá del botón */
+    width: 100%;
+    height: 2px;
+    transform: skewX(-45deg);
+}
+
+.cta-button::after {
+    bottom: 0;
+    right: -200%; /* Extender más allá del botón */
+    width: 100%;
+    height: 2px;
+    transform: skewX(-45deg);
+}
+
+.cta-button:hover::before {
+    opacity: 0.3;
+    left: 200%; /* Extender más allá del botón */
+    animation: spark-line-left 0.8s forwards; /* Animación más larga */
+}
+
+.cta-button:hover::after {
+    opacity: 0.3;
+    right: 200%; /* Extender más allá del botón */
+    animation: spark-line-right 0.8s forwards; /* Animación más larga */
+}
+
+@keyframes button-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.whatsapp-button {
+    background-color: #25D366; /* Color de WhatsApp */
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600; /* Seminegrita */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones mejoradas */
+    display: inline-flex; /* Para alinear icono y texto */
+    align-items: center;
+    gap: 0.6rem; /* Espacio entre icono y texto */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: pulse 2s infinite; /* Aplicar la animación sutil */
+}
+
+.whatsapp-button:hover {
+    background-color: #1DA851;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 15px #25D366, 0 0 30px #25D366; /* Resplandor verde más notable */
+}
+
+.whatsapp-button i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-button:hover i {
+    transform: rotate(10deg);
+}
+
+.whatsapp-button::before,
+.whatsapp-button::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5); /* Chispas blancas con opacidad reducida */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-button::before {
+    top: 50%;
+    left: -20px; /* Extender más allá del botón */
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.whatsapp-button::after {
+    top: 50%;
+    right: -20px; /* Extender más allá del botón */
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.whatsapp-button:hover::before {
+    opacity: 0.5;
+    animation: spark-left 0.8s forwards; /* Animación más larga */
+}
+
+.whatsapp-button:hover::after {
+    opacity: 0.5;
+    animation: spark-right 0.8s forwards; /* Animación más larga */
 }
 
 .services-overview, .why-choose-us {
@@ -198,8 +339,8 @@ header {
 }
 
 .service-card:hover {
-    transform: translateY(-15px) scale(1.02); /* Efecto de elevación y escala */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* Sombra más pronunciada */
+    transform: translateY(-25px) scale(1.05); /* Efecto de elevación y escala más pronunciado */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4); /* Sombra más pronunciada */
     background-color: var(--light-color); /* Cambio de color de fondo sutil */
 }
 
@@ -233,28 +374,60 @@ header {
     transform: translateY(-2px);
 }
 
-.why-choose-us ul {
-    list-style: none;
-    padding: 0;
-    display: inline-block;
-    text-align: left;
-    max-width: 800px;
+.why-choose-us {
+    padding: 6rem 2rem;
+    text-align: center;
+    max-width: 1200px;
     margin: 0 auto;
+    background-color: var(--light-color); /* Fondo sutil para la sección */
+    border-radius: 15px; /* Bordes redondeados para la sección */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03); /* Sombra muy sutil */
 }
 
-.why-choose-us li {
+.benefit-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Default a 1 columna para pantallas pequeñas */
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) { /* Para pantallas más grandes, 2 columnas */
+    .benefit-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.benefit-card {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    text-align: center;
+}
+
+.benefit-card:hover {
+    transform: translateY(-25px) scale(1.05); /* Efecto de elevación y escala más pronunciado */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4); /* Sombra más pronunciada */
+    background-color: var(--light-color);
+}
+
+.benefit-card .benefit-icon {
+    font-size: 4rem;
+    color: var(--secondary-color);
     margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    color: var(--text-color);
-    font-weight: 600; /* Aplicar negrita a todo el li */
 }
 
-.check-icon {
-    color: #28a745; /* Verde para el check */
-    margin-right: 1rem;
-    font-size: 1.5rem;
+.benefit-card h3 {
+    font-family: var(--font-family-headings);
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.benefit-card p {
+    font-size: 1.1rem;
+    color: var(--text-color);
 }
 
 .testimonials {
@@ -280,11 +453,31 @@ header {
     border-left: 5px solid var(--secondary-color); /* Borde de acento */
     color: var(--text-color);
     transition: transform 0.3s, box-shadow 0.3s; /* Transiciones mejoradas */
+    display: flex; /* Usar flexbox para alinear avatar y texto */
+    flex-direction: column; /* Apilar elementos */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar texto */
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px); /* Efecto de elevación sutil */
     box-shadow: 0 15px 30px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+}
+
+.testimonial-avatar {
+    width: 80px; /* Tamaño del avatar */
+    height: 80px;
+    border-radius: 50%; /* Forma circular */
+    overflow: hidden; /* Asegura que la imagen se recorte en círculo */
+    margin-bottom: 1.5rem; /* Espacio debajo del avatar */
+    border: 3px solid var(--primary-color); /* Borde alrededor del avatar */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra sutil para el avatar */
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
 }
 
 .testimonial-card p {
@@ -300,29 +493,49 @@ header {
 }
 
 .final-cta {
-    background-color: var(--primary-color); /* Cambiado a primary-color */
-    color: white; /* Texto blanco */
-    padding: 4rem 0; /* Padding vertical reducido */
+    background: linear-gradient(to right, var(--primary-color), #003366); /* Degradado más dinámico */
+    color: white;
+    padding: 5rem 0; /* Padding vertical aumentado */
+    position: relative; /* Para posicionar elementos internos */
+    overflow: hidden; /* Para ocultar elementos que se salgan */
+}
+
+.final-cta::before {
+    content: '\f0e7'; /* Icono de rayo de Font Awesome */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20rem; /* Tamaño muy grande */
+    color: rgba(255, 255, 255, 0.05); /* Muy transparente */
+    z-index: 0;
 }
 
 .final-cta-content {
-    max-width: 1200px; /* Limita el ancho del contenido */
-    margin: 0 auto; /* Centra el contenido */
-    padding: 0 2rem; /* Añade padding horizontal al contenido */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
     text-align: center;
+    position: relative; /* Para que el contenido esté por encima del icono */
+    z-index: 1;
 }
 
 .final-cta h2 {
-    color: white; /* Asegura que el título sea blanco */
-    margin-bottom: 2rem; /* Reduce el margen inferior del título */
-    font-weight: 700; /* Negrita */
+    color: white;
+    margin-bottom: 2.5rem; /* Aumentar margen inferior del título */
+    font-weight: 700;
+    font-size: 3.5rem; /* Título más grande */
 }
 
 .final-cta .cta-button {
     background-color: var(--secondary-color);
     color: var(--dark-color);
-    border-radius: 8px; /* Borde menos redondeado */
-    border: 2px solid var(--secondary-color); /* Borde sutil */
+    border-radius: 8px;
+    border: 2px solid var(--secondary-color);
+    padding: 1.2rem 3rem; /* Botón más grande */
+    font-size: 1.2rem; /* Texto del botón más grande */
 }
 
 .services-detail, .about-intro, .mission-vision-values, .contact-info-form {
@@ -604,7 +817,7 @@ footer {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 100px;
+        top: 100px; /* Ajustado para que se abra un poco más abajo y no tape el logo */
         flex-direction: column;
         background-color: #fff;
         width: 100%;
@@ -648,6 +861,33 @@ footer {
     }
 }
 
+#back-to-top {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    bottom: 30px;
+    right: 30px;
+    z-index: 99; /* Por encima de otros elementos */
+    font-size: 24px;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color); /* Color principal */
+    color: white;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: 50%; /* Redondo */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+}
+
+#back-to-top:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-5px);
+}
+
+#back-to-top i {
+    font-size: 1.2rem;
+}
+
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -670,14 +910,70 @@ footer {
     }
 }
 
-@keyframes pulse {
+@keyframes spark-line-left {
     0% {
-        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+        left: -200%;
+        opacity: 0;
     }
-    70% {
-        box-shadow: 0 0 0 20px rgba(255, 193, 7, 0);
+    50% {
+        opacity: 0.3;
     }
     100% {
-        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+        left: 200%;
+        opacity: 0;
+    }
+}
+
+@keyframes spark-line-right {
+    0% {
+        right: -200%;
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        right: 200%;
+        opacity: 0;
+    }
+}
+
+@keyframes spark-left {
+    0% {
+        left: -20px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        left: 120%;
+        opacity: 0;
+    }
+}
+
+@keyframes spark-right {
+    0% {
+        right: -20px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        right: 120%;
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 174, 0, 0.2); /* Color secundario con más opacidad */
+    }
+    70% {
+        box-shadow: 0 0 0 25px rgba(255, 174, 0, 0); /* Expansión más notable */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 174, 0, 0); /* Vuelve a cero */
     }
 }

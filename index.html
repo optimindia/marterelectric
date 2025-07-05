@@ -31,54 +31,74 @@
         <section class="hero">
             <h1>Soluciones Eléctricas de <strong>Confianza</strong></h1>
             <p>Más de <strong>20 años de experiencia</strong> garantizan un trabajo seguro y de calidad.</p>
-            <a href="contact.html" class="cta-button">Solicita tu cotización</a>
+            <a href="contact.html" class="cta-button">Solicita tu cotización <i class="fas fa-paper-plane"></i></a>
         </section>
 
-        <section class="services-overview">
+        <section class="services-overview reveal">
             <h2>Nuestros Servicios</h2>
             <div class="service-cards">
-                <div class="service-card">
+                <div class="service-card reveal-item">
                     <i class="fas fa-bolt service-icon"></i> <!-- Icono de Font Awesome -->
                     <h3>Instalaciones Eléctricas</h3>
                     <p>Realizamos instalaciones eléctricas <strong>completas</strong> para hogares y empresas, cumpliendo con las normativas vigentes.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card reveal-item">
                     <i class="fas fa-tools service-icon"></i> <!-- Icono de Font Awesome -->
                     <h3>Mantenimiento Preventivo</h3>
                     <p>Ofrecemos planes de mantenimiento <strong>preventivo</strong> para evitar fallas inesperadas y optimizar el consumo energético.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card reveal-item">
                     <i class="fas fa-wrench service-icon"></i> <!-- Icono de Font Awesome -->
                     <h3>Reparaciones Urgentes</h3>
                     <p>Solucionamos cualquier tipo de avería eléctrica con <strong>rapidez y eficacia</strong>, disponibles 24/7 para emergencias.</p>
                 </div>
             </div>
+            <a href="services.html" class="cta-button" style="margin-top: 3rem;">Ver Todos los Servicios <i class="fas fa-arrow-right"></i></a>
         </section>
 
-        <section class="why-choose-us">
+        <section class="why-choose-us reveal">
             <h2>¿Por Qué Elegirnos?</h2>
-            <ul>
-                <li><i class="fas fa-check-circle check-icon"></i> Personal altamente calificado y en constante formación.</li>
-                <li><i class="fas fa-check-circle check-icon"></i> Atención personalizada y presupuestos transparentes sin compromiso.</li>
-                <li><i class="fas fa-check-circle check-icon"></i> Garantía de calidad en todos nuestros materiales y mano de obra.</li>
-                <li><i class="fas fa-check-circle check-icon"></i> Compromiso con la seguridad y la eficiencia energética.</li>
-            </ul>
+            <div class="benefit-cards-grid">
+                <div class="benefit-card reveal-item">
+                    <i class="fas fa-award benefit-icon"></i>
+                    <h3>Calidad Certificada</h3>
+                    <p>Personal altamente calificado y en constante formación, garantizando un servicio de excelencia.</p>
+                </div>
+                <div class="benefit-card reveal-item">
+                    <i class="fas fa-handshake benefit-icon"></i>
+                    <h3>Atención Personalizada</h3>
+                    <p>Presupuestos transparentes y sin compromiso, adaptados a tus necesidades específicas.</p>
+                </div>
+                <div class="benefit-card reveal-item">
+                    <i class="fas fa-shield-alt benefit-icon"></i>
+                    <h3>Seguridad Garantizada</h3>
+                    <p>Garantía de calidad en todos nuestros materiales y mano de obra, priorizando tu seguridad.</p>
+                </div>
+                <div class="benefit-card reveal-item">
+                    <i class="fas fa-lightbulb benefit-icon"></i>
+                    <h3>Eficiencia Energética</h3>
+                    <p>Compromiso con soluciones que optimizan el consumo y cuidan el medio ambiente.</p>
+                </div>
+            </div>
         </section>
 
-        <section class="testimonials">
+        <section class="testimonials reveal">
             <div class="testimonials-content">
                 <h2>Lo Que Dicen Nuestros Clientes</h2>
-                <div class="testimonial-card">
+                <div class="testimonial-card reveal-item">
+                    <div class="testimonial-avatar">
+                        <img src="images/avatar.jpg" alt="Avatar de Cliente">
+                    </div>
                     <p><em>"Excelente servicio. Resolvieron mi problema eléctrico en tiempo récord. El equipo fue muy profesional y amable. ¡Totalmente recomendados!"</em></p>
                     <cite>- <strong>María G.</strong>, Cliente Residencial</cite>
                 </div>
             </div>
         </section>
 
-        <section class="final-cta">
+        <section class="final-cta reveal">
             <div class="final-cta-content">
                 <h2>¿Listo para empezar tu proyecto o resolver una <strong>emergencia</strong>?</h2>
-                <a href="contact.html" class="cta-button">Contáctanos ahora</a>
+                <a href="contact.html" class="cta-button">¡Agenda tu Consulta Ahora! <i class="fas fa-calendar-check"></i></a>
             </div>
         </section>
     </main>
@@ -135,5 +155,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <button id="back-to-top" title="Volver Arriba"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>
